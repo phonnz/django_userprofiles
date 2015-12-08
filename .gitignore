@@ -4,7 +4,7 @@
 __pycache__/
 *.py[cod]
 *.pyc
-django_userprofiles/*.pyc
+django_userprofiles/*pyc
 userprofiles/*.pyc
 userprofiles/migrations/*.pyc
 
