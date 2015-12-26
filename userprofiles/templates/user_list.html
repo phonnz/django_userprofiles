@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>{{msg}}</h1>
+        <table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>username</th>
+      <th>name</th>
+      <th>last_name</th>
+      </tr>
+  </thead>
+  <tbody>
+        {% for user in object_list %}
+            <tr>
+            	<td>{{ user.id }}</td>
+            	<td>{{ user.username }}</td>
+            	<td>{{ user.name }}</td>
+            	<td>{{ user.last_name }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    </body>
+</html>
