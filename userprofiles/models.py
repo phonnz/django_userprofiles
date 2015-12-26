@@ -23,7 +23,15 @@ class UserManager(BaseUserManager):
         return self._create_user(username, email, password, True, True, True, **extra_fields)
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class TimeStampModel(models.Model):
+
+    created = models.DateTimeField('Fecha de creación', auto_now_add = True)
+    modified = models.DateTimeField('Fecha de actualización', auto_now = True)
+
+    class Meta:
+        abstract = True
+
+class User(AbstractBaseUser, PermissionsMixin, TimeStampModel):
     username = models.CharField('nombre de usuario', max_length=50, unique=True)
     email = models.EmailField('email', max_length = 50, unique = True)
     # plain_pass = models.CharField(max_length=25, null=True, blank=True)
@@ -33,8 +41,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     points = models.IntegerField('Puntos', default=100)
     avatar = models.ImageField('Avatar', upload_to='/', null = True, blank = True)
     certifier_document = models.FileField('Documento verificador', null = True , blank = True)
-    date_joined = models.DateTimeField('Fecha de registro', editable=False, auto_now_add=True)
-    updated = models.DateTimeField('Actualizado', editable = False, auto_now = True)
+    # date_joined = models.DateTimeField('Fecha de registro', editable=False, auto_now_add=True)
+    # updated = models.DateTimeField('Actualizado', editable = False, auto_now = True)
 
     objects = UserManager()
 
