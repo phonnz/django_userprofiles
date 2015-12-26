@@ -1,12 +1,11 @@
-.idea/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *.pyc
-django_userprofiles/*pyc
+django_userprofiles/*.pyc
 userprofiles/*.pyc
-userprofiles/migrations/*.pyc
+userprofiles/*/*.pyc
 
 # C extensions
 *.so
