@@ -6,5 +6,13 @@
     </head>
     <body>
         <h1>{{object.username}}</h1>
+        <p>{{ created }}</p>
+
+        <h2>More Users</h2>
+        <ul>
+            {% for user in users %}
+            <li><a href="{% url 'userprofiles:username_detail' user.username %}" >{{ user.username }}</li>
+            {% endfor %}
+        </ul>
     </body>
 </html>
