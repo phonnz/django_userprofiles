@@ -45,11 +45,11 @@ class SlugUserDetailView(LoginRequiredMixin, DetailView):
     model = User
     template_name = 'user_detail.html'
     login_url = '/'
-    slug_field = 'username'
+    slug_field = 'slug'
 
     def get_context_data(self, **kwargs):
         context = super(SlugUserDetailView, self).get_context_data(**kwargs)
-        context['created'] = User.objects.get(username = context['object'].username).created
+        context['created'] = User.objects.get(slug = context['object'].slug).created
         context['users'] = [username for username in User.objects.all()]
 
         return context
