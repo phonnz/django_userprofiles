@@ -3,6 +3,10 @@ import datetime
 
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+## If you don't need to replace special characters on your slugs
+from django.template.defaultfilters import slugify
+## More options for characters replacement
+# from slughifi import slughifi as slugify
 
 class UserManager(BaseUserManager):
 
@@ -33,6 +37,7 @@ class TimeStampModel(models.Model):
 
 class User(AbstractBaseUser, PermissionsMixin, TimeStampModel):
     username = models.CharField('nombre de usuario', max_length=50, unique=True)
+    slug = models.SlugField('Slug', unique = True)
     email = models.EmailField('email', max_length = 50, unique = True)
     # plain_pass = models.CharField(max_length=25, null=True, blank=True)
     first_name = models.CharField('Nombre', max_length = 100)
@@ -51,6 +56,13 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampModel):
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
+
+    def save(self, *args, **kwargs):
+
+        if not self.slug:
+            self.slug = slugify(self.username)
+        super(User, self).save(*args, **kwargs)
+
 
     def get_short_name(self):
         return self.username
