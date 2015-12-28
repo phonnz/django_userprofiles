@@ -25,9 +25,9 @@ class AllUsersView(LoginRequiredMixin, ListView):
     #     print 'This is a get request'
     #     return HttpResponse('GET')
 
-    def post(self, request, *args, **kwargs):
-        print 'This is a  post request'
-        return HttpResponse('POST')
+    # def post(self, request, *args, **kwargs):
+    #     print 'This is a  post request'
+    #     return HttpResponse('POST')
 
 class UserDetailView(LoginRequiredMixin, DetailView):
     model = User
