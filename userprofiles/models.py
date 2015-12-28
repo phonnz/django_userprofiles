@@ -61,6 +61,8 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampModel):
 
         if not self.slug:
             self.slug = slugify(self.username)
+        else:
+            self.slug = slugify(self.slug)
         super(User, self).save(*args, **kwargs)
 
 
