@@ -77,3 +77,7 @@ class CreateUserView(CreateView):
 def signout(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+def signin(request):
+
+    return HttpResponseRedirect('/')
