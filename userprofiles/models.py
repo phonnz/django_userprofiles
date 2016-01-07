@@ -7,6 +7,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.template.defaultfilters import slugify
 ## More options for characters replacement
 # from slughifi import slughifi as slugify
+from django.core.validators import RegexValidator
 
 class UserManager(BaseUserManager):
 
@@ -40,8 +41,8 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampModel):
     slug = models.SlugField('Slug', unique = True)
     email = models.EmailField('email', max_length = 50, unique = True)
     # plain_pass = models.CharField(max_length=25, null=True, blank=True)
-    first_name = models.CharField('Nombre', max_length = 100)
-    last_name = models.CharField('Apellido Paterno', max_length = 100)
+    first_name = models.CharField('Nombre', max_length = 100, validators = [RegexValidator(regex='^[a-zA-Z]*$', message ='Solo pueden ser letras')])
+    last_name = models.CharField('Apellido Paterno', max_length = 100, validators = [RegexValidator(regex='^[a-zA-Z]*$', message ='Solo pueden ser letras')])
     mom_last_name = models.CharField('Apellido Materno', max_length = 100, null = True, blank = True)
     points = models.IntegerField('Puntos', default=100)
     avatar = models.ImageField('Avatar', upload_to='/', null = True, blank = True)

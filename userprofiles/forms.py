@@ -16,4 +16,4 @@ class CreateUserForm(forms.ModelForm):
         ## If you just wanna render all fields from your model
         # fields = '__all__'
         ## If you wanna order and filter model fields
-        fields = ('username','email','first_name','last_name','mom_last_name','points','avatar','certifier_document',)
+        fields = ('username','email', 'password', 'first_name','last_name','mom_last_name','points','avatar','certifier_document',)
