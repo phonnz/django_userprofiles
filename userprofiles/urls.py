@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     url(r'^usuario/(?P<pk>\d+)/$', UserDetailView.as_view(), name='user_detail'),
     url(r'^nombre-de-usuario/(?P<slug>[-\w]+)/$', SlugUserDetailView.as_view(), name='username_detail'),
     url(r'^registrar/$', CreateUserView.as_view(), name='create_user'),
-    url(r'^login/$', 'userprofiles.views.signin', name='signin'),
+    url(r'^login/$', 'userprofiles.views.Signin', name='signin'),
     url(r'^cerrar-sesion/$', 'userprofiles.views.signout', name='signout'),
 
 )

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import ListView, DetailView, CreateView
@@ -8,7 +9,7 @@ from braces.views import LoginRequiredMixin
 
 
 from .models import User
-from .forms import CreateUserForm
+from .forms import CreateUserForm, SigninUserForm
 
 def home(request):
     return render(request, 'home.html', {})
@@ -19,7 +20,7 @@ class AllUsersView(LoginRequiredMixin, ListView):
     ## If we wanna change default object name (object_list) just set context_object_name
     context_object_name = 'users'
     template_name = 'user_list.html'
-    login_url = '/'
+    login_url = '/users/login/'
 
     # def get(self, request, *args, **kwargs):
     #     print 'This is a get request'
@@ -78,6 +79,26 @@ def signout(request):
     logout(request)
     return HttpResponseRedirect('/')
 
-def signin(request):
 
-    return HttpResponseRedirect('/')
+
+def Signin(request):
+    error_message = ''
+    form = SigninUserForm(request.POST or None)
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        print 'es post'
+        user = authenticate(username=username, password=password)
+
+        if user:
+            print 'user'
+            if user.is_active:
+                print 'print active'
+                login(request, user)
+
+                return HttpResponseRedirect('/')
+
+        else:
+            error_message = 'The username or password do not match'
+    return render(request, 'signin.html', {'form':form, 'error_message':error_message})

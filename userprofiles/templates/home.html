@@ -8,13 +8,13 @@
         <h1>Home</h1>
         <ul>
             <li><a href="{% url 'userprofiles:all_users' %}" >Users</a></li>
-            {% if request.user.is_authenticated %}
+            {% if user.is_authenticated %}
             <li><a href="{% url 'userprofiles:user_detail' user.id %}" >My user with id</a></li>
+            <li><a href="{% url 'userprofiles:username_detail' user.username %}" >My user with username</a></li>
+            <li><a href="{% url 'userprofiles:signout' %}" >Logout</a></li>
             {% else %}
             <li><a href="{% url 'userprofiles:signin' %}" >Login</a></li>
-            <li><a href="{% url 'userprofiles:create_user' %}" >Registro</a></li>
             {% endif %}
-            <li><a href="{% url 'userprofiles:username_detail' user.username %}" >My user with username</a></li>
             <li><a href="{% url 'userprofiles:create_user'  %}" >New user</a></li>
         </ul>
 

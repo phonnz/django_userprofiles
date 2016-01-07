@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Registro</title>
+    </head>
+    <body>
+        {{error_message}}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <p>
+                {{ form.username.label }}
+            {{ form.username }}
+            {{ form.username.errors }}
+        </p>
+            <p>
+                {{ form.password.label }}
+            {{ form.password }}
+            {{ form.password.errors }}
+        </p>
+            <input type="submit" value="Register">
+    </form>
+    </body>
+</html>
