@@ -36,7 +36,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
-        context['created'] = User.objects.get(pk = context['object'].id).created
+        context['date_joined'] = User.objects.get(pk = context['object'].id).date_joined
         context['users'] = [username for username in User.objects.all()]
 
         return context
@@ -49,7 +49,7 @@ class SlugUserDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(SlugUserDetailView, self).get_context_data(**kwargs)
-        context['created'] = User.objects.get(slug = context['object'].slug).created
+        context['date_joined'] = User.objects.get(slug = context['object'].slug).date_joined
         context['users'] = [username for username in User.objects.all()]
 
         return context
