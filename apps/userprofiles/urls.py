@@ -4,8 +4,7 @@ from .views import AllUsersView, UserDetailView, SlugUserDetailView, CreateUserV
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'userprofiles.views.home', name='home'),
-    url(r'^usuarios/$', AllUsersView.as_view(), name='all_users'),
+    url(r'^$', AllUsersView.as_view(), name='all_users'),
     url(r'^usuario/(?P<pk>\d+)/$', UserDetailView.as_view(), name='user_detail'),
     url(r'^nombre-de-usuario/(?P<slug>[-\w]+)/$', SlugUserDetailView.as_view(), name='username_detail'),
     url(r'^registrar/$', CreateUserView.as_view(), name='create_user'),

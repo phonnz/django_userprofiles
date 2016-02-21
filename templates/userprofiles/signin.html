@@ -6,20 +6,20 @@
     </head>
     <body>
         {{error_message}}
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" >
             {% csrf_token %}
 
             <p>
                 {{ form.username.label }}
             {{ form.username }}
-            {{ form.username.errors }}
+            <!-- {{ form.username.errors }} -->
         </p>
             <p>
                 {{ form.password.label }}
             {{ form.password }}
             {{ form.password.errors }}
         </p>
-            <input type="submit" value="Register">
+            <input type="submit" value="Iniciar sesión">
     </form>
     </body>
 </html>

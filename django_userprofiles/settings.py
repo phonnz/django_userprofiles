@@ -10,8 +10,10 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os, sys
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-# sys.path.append(BASE_DIR.child("apps"))
+from unipath import Path
+
+BASE_DIR = Path(__file__).ancestor(2)
+sys.path.append(BASE_DIR.child("apps"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -23,6 +25,8 @@ SECRET_KEY = 'b3)vx%+cz-*g8^26#s6vmhv9af53l)rlf(=_furb_ax$-+sf4o'
 DEBUG = True
 
 TEMPLATE_DEBUG = True
+
+TEMPLATE_DIRS = [BASE_DIR.child('templates'),]
 
 ALLOWED_HOSTS = []
 
@@ -38,7 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'userprofiles',
-    'web',
+    # 'web',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -48,6 +52,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'userprofiles.backends.EmailOrUsernameOrMobileModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 TEMPLATE_LOADERS = (
@@ -101,4 +110,4 @@ STATIC_URL = '/static/'
 
 EMAIL_BACKEND = 'djrill.mail.backends.djrill.DjrillBackend'
 
-MANDRILL_API_KEY = 'BLJ52g807hgbZw'
+MANDRILL_API_KEY = 's_2BHQGrBLJ52g807hgbZw'

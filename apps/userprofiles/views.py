@@ -11,15 +11,14 @@ from braces.views import LoginRequiredMixin
 from .models import User
 from .forms import CreateUserForm, SigninUserForm
 
-def home(request):
-    return render(request, 'home.html', {})
+
 
 ## Login required with class based views
-class AllUsersView(LoginRequiredMixin, ListView):
+class AllUsersView(ListView):
     model = User
     ## If we wanna change default object name (object_list) just set context_object_name
     context_object_name = 'users'
-    template_name = 'user_list.html'
+    template_name = 'userprofiles/userprofiles/user_list.html'
     login_url = '/users/login/'
 
     # def get(self, request, *args, **kwargs):
@@ -32,7 +31,7 @@ class AllUsersView(LoginRequiredMixin, ListView):
 
 class UserDetailView(LoginRequiredMixin, DetailView):
     model = User
-    template_name = 'user_detail.html'
+    template_name = 'userprofiles/user_detail.html'
     login_url = '/'
 
     def get_context_data(self, **kwargs):
@@ -44,7 +43,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 
 class SlugUserDetailView(LoginRequiredMixin, DetailView):
     model = User
-    template_name = 'user_detail.html'
+    template_name = 'userprofiles/user_detail.html'
     login_url = '/'
     slug_field = 'slug'
 
@@ -57,19 +56,22 @@ class SlugUserDetailView(LoginRequiredMixin, DetailView):
 
 class CreateUserView(CreateView):
     model = User
-    template_name = 'register.html'
+    template_name = 'userprofiles/register.html'
     ## If you just wanna render form without style and order
     # fields = '__all__'
     ## If you wanna use custom form; You need to create form class in forms.py file
     form_class = CreateUserForm
-    success_url = '/users/usuarios/'
+    success_url = '/'
 
     def form_valid(self, form):
-        print 'valid'
-        return super(CreateUserView, self).form_valid(form)
+        user = User.objects.create_user(username=form.cleaned_data['username'], email=form.cleaned_data['email'],password=form.cleaned_data['password'])
+
+        return HttpResponseRedirect('/')
+
+        # return super(CreateUserView, self).form_valid(form)
 
     def form_invalid(self, form):
-        print 'invalid'
+        print 'invalid form'
         return super(CreateUserView, self).form_invalid(form)
 
 
@@ -88,17 +90,14 @@ def Signin(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        print 'es post'
         user = authenticate(username=username, password=password)
 
         if user:
-            print 'user'
             if user.is_active:
-                print 'print active'
                 login(request, user)
 
                 return HttpResponseRedirect('/')
 
         else:
             error_message = 'The username or password do not match'
-    return render(request, 'signin.html', {'form':form, 'error_message':error_message})
+    return render(request, 'userprofiles/signin.html', {'form':form, 'error_message':error_message})

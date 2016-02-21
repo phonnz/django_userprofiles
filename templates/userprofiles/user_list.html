@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>{{msg}}</h1>
+        <ul>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'userprofiles:user_detail' user.id %}" >My user with id</a></li>
+            <li><a href="{% url 'userprofiles:username_detail' user.username %}" >My user with username</a></li>
+            <li><a href="{% url 'userprofiles:signout' %}" >Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'userprofiles:signin' %}" >Login</a></li>
+            <li><a href="{% url 'userprofiles:create_user'  %}" >Register</a></li>
+            {% endif %}
+        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>username</th>
+              <th>name</th>
+              <th>last_name</th>
+              <th></th>
+              </tr>
+          </thead>
+          <tbody>
+                {% for user in users %}
+                    <tr>
+                    	<td>{{ user.id }}</td>
+                    	<td><a href="{% url 'userprofiles:username_detail' user.slug %}">{{ user.username }}</a></td>
+                    	<td>{{ user.first_name }}</td>
+                    	<td>{{ user.last_name }}</td>
+                        <td>{{ user.mom_last_name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
