@@ -14,6 +14,7 @@ class EmailOrUsernameOrMobileModelBackend(object):
         try:
 
             user = User.objects.get(**kwargs)
+            print user.password
             if user.check_password(password):
                 print 'is valid'
                 return user

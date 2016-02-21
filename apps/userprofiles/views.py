@@ -93,11 +93,13 @@ def Signin(request):
         user = authenticate(username=username, password=password)
 
         if user:
+            print 'auth'
             if user.is_active:
                 login(request, user)
 
                 return HttpResponseRedirect('/')
-
+            else:
+                error_message = 'Your account is not validated yet'
         else:
             error_message = 'The username or password do not match'
     return render(request, 'userprofiles/signin.html', {'form':form, 'error_message':error_message})

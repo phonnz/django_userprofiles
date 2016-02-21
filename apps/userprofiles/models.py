@@ -12,7 +12,6 @@ from django.core.validators import RegexValidator
 def make_slug(self):
     if not self.slug or self.slug == 'newUser' :
         self.slug = slugify(self.username)
-        self.set_password(self.password)
     else:
         self.slug = slugify(self.slug)
 
