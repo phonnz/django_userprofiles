@@ -44,12 +44,20 @@ Through this app you can:
 
 * ```python manage.py runserver```
 
+&nbsp;
 
-
-> **You should use django admin interface to activate users**   
-> From console:   
->	```python manage.py createsuperuser``` 
-> Activate your superuser through DB    
-> 	```update userprofiles_user set is_active = 1```      
-> ```localhost:8000/admin```   
+> **You should use django admin interface to activate users**  
 > 
+> From console:   
+> ```python manage.py createsuperuser```   
+> 
+> Activate your superuser through DB    
+> ```mysql: update userprofiles_user set is_active  1```   
+> 
+> You can sign in in your browser
+> ```localhost:8000/admin```   
+ 
+
+&nbsp;
+
+> **You can find troubleshooting help in** [my blog](https://itbinnacle.wordpress.com/) 
