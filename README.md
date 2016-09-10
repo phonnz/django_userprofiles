@@ -1,18 +1,21 @@
 # Django custom users management app
 
-This is a simple example of custom user app in Django Framework 1.9 
-
+This is a simple example of custom user app in Django Framework 1.9 + mailgun + Django Rest Framework
 
 Through this app you can:
 
 * Design your own User model
+* Subscribe future users
 * Create users
 * Update users
 * Delete users
 * Watch user details (profile)
 * Sign in
 * Sign out
+* Sent email verification
+* Upload and set user profile picture 
 * Create automatic slugs
+* Expose users throgh API (Django Rest Framework)
 
 
 ## Running the project
@@ -54,8 +57,8 @@ Through this app you can:
 > Activate your superuser through DB    
 > ```mysql: update userprofiles_user set is_active  1```   
 > 
-> You can sign in in your browser
-> ```localhost:8000/admin```   
+> You can sign in in your browser   
+> ``` localhost:8000/admin ```  
  
 
 &nbsp;
